@@ -1,0 +1,590 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="WP_DisabilityDetails"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:p="http://schemas.microsoft.com/workflow/2012/07/xaml/activities"
+ xmlns:s="clr-namespace:System;assembly=mscorlib"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:sd="clr-namespace:System.Data;assembly=System.Data"
+ xmlns:ui="http://schemas.uipath.com/workflow/activities"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="GID" Type="InArgument(x:String)" />
+    <x:Property Name="DirectoryPathRunTime" Type="InOutArgument(x:String)" />
+    <x:Property Name="Member1Name" Type="InArgument(x:String)" />
+    <x:Property Name="Member2Name" Type="InArgument(x:String)" />
+    <x:Property Name="Member3Name" Type="InArgument(x:String)" />
+    <x:Property Name="Member4Name" Type="InArgument(x:String)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>WP_DisabilityDetails_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>System.Data.Entity</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Plugin.Workflow</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="WP_DisabilityDetails" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="sd:DataTable" Name="DT_Disability" />
+      <Variable x:TypeArguments="x:String" Name="CircumstanceStartDate" />
+      <Variable x:TypeArguments="s:String[]" Name="CircumstanceStartDateArr" />
+      <Variable x:TypeArguments="ui:GenericValue" Name="GroupIDRuntime" />
+      <Variable x:TypeArguments="ui:GenericValue" Name="DirectoryRuntime" />
+      <Variable x:TypeArguments="sd:DataTable" Name="DT_FilterbyGroupID" />
+      <Variable x:TypeArguments="sd:DataTable" Name="DT_MainPage" />
+      <Variable x:TypeArguments="sd:DataTable" Name="DT_FilterbyMemberID" />
+      <Variable x:TypeArguments="scg:List(x:String)" Name="ListGroupID" />
+      <Variable x:TypeArguments="ui:GenericValue" Name="ListGroupIDCount" />
+      <Variable x:TypeArguments="scg:List(x:String)" Name="ListMemberID" />
+      <Variable x:TypeArguments="ui:GenericValue" Name="IndexCount" />
+      <Variable x:TypeArguments="ui:GenericValue" Name="ListMemberIDCount" />
+      <Variable x:TypeArguments="ui:GenericValue" Name="MemberIDRunTime" />
+      <Variable x:TypeArguments="ui:GenericValue" Name="MemberCounter" />
+      <Variable x:TypeArguments="ui:GenericValue" Name="UniqueCount" />
+    </Sequence.Variables>
+    <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Excel Application Scope" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_1" WorkbookPath="Scenarios_1.xlsx">
+      <ui:ExcelApplicationScope.Body>
+        <ActivityAction x:TypeArguments="ui:WorkbookApplication">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="ui:WorkbookApplication" Name="ExcelWorkbookScope" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Do" sap2010:WorkflowViewState.IdRef="Sequence_2">
+            <ui:ExcelReadRange AddHeaders="True" DataTable="[DT_MainPage]" DisplayName="Read Range" sap2010:WorkflowViewState.IdRef="ExcelReadRange_1" SheetName="WP_Disability">
+              <ui:ExcelReadRange.Range>
+                <InArgument x:TypeArguments="x:String">
+                  <Literal x:TypeArguments="x:String" Value="" />
+                </InArgument>
+              </ui:ExcelReadRange.Range>
+            </ui:ExcelReadRange>
+          </Sequence>
+        </ActivityAction>
+      </ui:ExcelApplicationScope.Body>
+    </ui:ExcelApplicationScope>
+    <Sequence sap2010:WorkflowViewState.IdRef="Sequence_4">
+      <Assign sap2010:WorkflowViewState.IdRef="Assign_8">
+        <Assign.To>
+          <OutArgument x:TypeArguments="ui:GenericValue">[GroupIDRuntime]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="ui:GenericValue">[GID]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <WriteLine DisplayName="Write Line" sap2010:WorkflowViewState.IdRef="WriteLine_1" Text="[&quot;Group ID from relationship page is &quot; + GID]" />
+      <WriteLine DisplayName="Write Line" sap2010:WorkflowViewState.IdRef="WriteLine_2" Text="[&quot;GroupIDRuntime is&quot; + GroupIDRuntime]" />
+      <Assign sap2010:WorkflowViewState.IdRef="Assign_9">
+        <Assign.To>
+          <OutArgument x:TypeArguments="ui:GenericValue">[DirectoryRuntime]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="ui:GenericValue">[DirectoryPathRunTime]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <Assign sap2010:WorkflowViewState.IdRef="Assign_10">
+        <Assign.To>
+          <OutArgument x:TypeArguments="sd:DataTable">[DT_FilterbyGroupID]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="sd:DataTable">[DT_MainPage.DefaultView.ToTable(True,"Group ID")]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <Assign sap2010:WorkflowViewState.IdRef="Assign_11">
+        <Assign.To>
+          <OutArgument x:TypeArguments="sd:DataTable">[DT_FilterbyMemberID]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="sd:DataTable">[DT_MainPage.DefaultView.ToTable(True,"Member ID")]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <Assign sap2010:WorkflowViewState.IdRef="Assign_12">
+        <Assign.To>
+          <OutArgument x:TypeArguments="scg:List(x:String)">[ListGroupID]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="scg:List(x:String)">[(From row in DT_FilterbyGroupID.AsEnumerable() Select Convert.Tostring(row(“Group ID”))).ToList()]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <Assign sap2010:WorkflowViewState.IdRef="Assign_13">
+        <Assign.To>
+          <OutArgument x:TypeArguments="ui:GenericValue">[ListGroupIDCount]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="ui:GenericValue">[ListGroupID.Count]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <Assign sap2010:WorkflowViewState.IdRef="Assign_14">
+        <Assign.To>
+          <OutArgument x:TypeArguments="scg:List(x:String)">[ListMemberID]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="scg:List(x:String)">[(From row in DT_FilterbyMemberID.AsEnumerable() Select Convert.Tostring(row(“Member ID”))).ToList()]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <Assign sap2010:WorkflowViewState.IdRef="Assign_15">
+        <Assign.To>
+          <OutArgument x:TypeArguments="ui:GenericValue">[ListMemberIDCount]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="ui:GenericValue">[ListMemberID.Count]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <Assign sap2010:WorkflowViewState.IdRef="Assign_16">
+        <Assign.To>
+          <OutArgument x:TypeArguments="ui:GenericValue">[IndexCount]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="ui:GenericValue">[0]</InArgument>
+        </Assign.Value>
+      </Assign>
+    </Sequence>
+    <While sap2010:WorkflowViewState.IdRef="While_1" Condition="[IndexCount &lt; ListMemberIDCount]">
+      <Sequence sap2010:WorkflowViewState.IdRef="Sequence_5">
+        <Assign sap2010:WorkflowViewState.IdRef="Assign_17">
+          <Assign.To>
+            <OutArgument x:TypeArguments="ui:GenericValue">[MemberIDRunTime]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="ui:GenericValue">[ListMemberID.Item(Indexcount)]</InArgument>
+          </Assign.Value>
+        </Assign>
+        <Assign sap2010:WorkflowViewState.IdRef="Assign_18">
+          <Assign.To>
+            <OutArgument x:TypeArguments="ui:GenericValue">[MemberCounter]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="ui:GenericValue">[0]</InArgument>
+          </Assign.Value>
+        </Assign>
+        <Assign sap2010:WorkflowViewState.IdRef="Assign_19">
+          <Assign.To>
+            <OutArgument x:TypeArguments="ui:GenericValue">[UniqueCount]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="ui:GenericValue">[0]</InArgument>
+          </Assign.Value>
+        </Assign>
+        <ui:FilterDataTable DataTable="[DT_MainPage]" DisplayName="Filter Data Table" FilterRowsMode="Keep" sap2010:WorkflowViewState.IdRef="FilterDataTable_2" OutputDataTable="[DT_Disability]" SelectColumnsMode="Keep">
+          <ui:FilterDataTable.Filters>
+            <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+              <ui:FilterOperationArgument BooleanOperator="And" Operator="CONTAINS">
+                <ui:FilterOperationArgument.Column>
+                  <InArgument x:TypeArguments="x:String">["Member ID"]</InArgument>
+                </ui:FilterOperationArgument.Column>
+                <ui:FilterOperationArgument.Operand>
+                  <InArgument x:TypeArguments="x:String">[ListMemberID.Item(IndexCount)]</InArgument>
+                </ui:FilterOperationArgument.Operand>
+              </ui:FilterOperationArgument>
+              <ui:FilterOperationArgument BooleanOperator="And" Operator="EQ">
+                <ui:FilterOperationArgument.Column>
+                  <InArgument x:TypeArguments="x:String">["Group ID"]</InArgument>
+                </ui:FilterOperationArgument.Column>
+                <ui:FilterOperationArgument.Operand>
+                  <InArgument x:TypeArguments="ui:GenericValue">[GroupIDRuntime]</InArgument>
+                </ui:FilterOperationArgument.Operand>
+              </ui:FilterOperationArgument>
+            </scg:List>
+          </ui:FilterDataTable.Filters>
+          <ui:FilterDataTable.SelectColumns>
+            <scg:List x:TypeArguments="InArgument" Capacity="4">
+              <x:Null />
+            </scg:List>
+          </ui:FilterDataTable.SelectColumns>
+        </ui:FilterDataTable>
+        <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[DT_Disability]" DisplayName="For Each Row" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+          <ui:ForEachRow.Body>
+            <ActivityAction x:TypeArguments="sd:DataRow">
+              <ActivityAction.Argument>
+                <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
+              </ActivityAction.Argument>
+              <Sequence DisplayName="Body" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                <If Condition="[Convert.ToString(row.Item(“Member ID”)) = MemberIDRunTime]" sap2010:WorkflowViewState.IdRef="If_2">
+                  <If.Then>
+                    <Sequence sap2010:WorkflowViewState.IdRef="Sequence_6">
+                      <Assign sap2010:WorkflowViewState.IdRef="Assign_20">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="ui:GenericValue">[UniqueCount]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="ui:GenericValue">[UniqueCount+1]</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                      <WriteLine DisplayName="Write Line" sap2010:WorkflowViewState.IdRef="WriteLine_3" Text="[&quot;Unique count is &quot; + UniqueCount]" />
+                    </Sequence>
+                  </If.Then>
+                </If>
+                <While sap2010:WorkflowViewState.IdRef="While_2" Condition="[MemberCounter &lt; UniqueCount]">
+                  <Sequence sap2010:WorkflowViewState.IdRef="Sequence_7">
+                    <ui:GetRowItem Column="{x:Null}" ColumnIndex="{x:Null}" ColumnName="CircumstanceStartDate" DisplayName="Get Row Item" sap2010:WorkflowViewState.IdRef="GetRowItem_1" Row="[row]">
+                      <ui:GetRowItem.Value>
+                        <OutArgument x:TypeArguments="x:String">[CircumstanceStartDate]</OutArgument>
+                      </ui:GetRowItem.Value>
+                    </ui:GetRowItem>
+                    <p:SplitString DisplayName="Split string" sap2010:WorkflowViewState.IdRef="SplitString_1" Input="[CircumstanceStartDate]" Result="[CircumstanceStartDateArr]" Separator="/" StringSplitOptions="None" />
+                    <If Condition="[row(&quot;Name&quot;).ToString=&quot;M1&quot;]" sap2010:WorkflowViewState.IdRef="If_3">
+                      <If.Then>
+                        <ui:SelectItem ContinueOnError="{x:Null}" DelayAfter="{x:Null}" DelayBefore="{x:Null}" DisplayName="Select Item 'SELECT  personIncurring...'" sap2010:WorkflowViewState.IdRef="SelectItem_6" Item="[Member1Name]">
+                          <ui:SelectItem.Items>
+                            <scg:List x:TypeArguments="x:String" Capacity="4">
+                              <x:String>Duane Robinson 41M</x:String>
+                              <x:String>Steven Upre 12F</x:String>
+                            </scg:List>
+                          </ui:SelectItem.Items>
+                          <ui:SelectItem.Target>
+                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="4d1f5e7a179202621b92dca9cc61e7fa" Selector="&lt;html title='LA IE - Disability - Details' /&gt;&lt;webctrl id='cin' tag='SELECT' /&gt;" WaitForReady="INTERACTIVE" />
+                          </ui:SelectItem.Target>
+                        </ui:SelectItem>
+                      </If.Then>
+                    </If>
+                    <If Condition="[row(&quot;Name&quot;).ToString=&quot;M2&quot;]" sap2010:WorkflowViewState.IdRef="If_4">
+                      <If.Then>
+                        <ui:SelectItem ContinueOnError="{x:Null}" DelayAfter="{x:Null}" DelayBefore="{x:Null}" DisplayName="Select Item 'SELECT  personIncurring...'" sap2010:WorkflowViewState.IdRef="SelectItem_10" Item="[Member2Name]">
+                          <ui:SelectItem.Items>
+                            <scg:List x:TypeArguments="x:String" Capacity="4">
+                              <x:String>Duane Robinson 41M</x:String>
+                              <x:String>Steven Upre 12F</x:String>
+                            </scg:List>
+                          </ui:SelectItem.Items>
+                          <ui:SelectItem.Target>
+                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="4d1f5e7a179202621b92dca9cc61e7fa" Selector="&lt;html title='LA IE - Disability - Details' /&gt;&lt;webctrl id='cin' tag='SELECT' /&gt;" WaitForReady="INTERACTIVE" />
+                          </ui:SelectItem.Target>
+                        </ui:SelectItem>
+                      </If.Then>
+                    </If>
+                    <If Condition="[row(&quot;Name&quot;).ToString=&quot;M3&quot;]" sap2010:WorkflowViewState.IdRef="If_5">
+                      <If.Then>
+                        <ui:SelectItem ContinueOnError="{x:Null}" DelayAfter="{x:Null}" DelayBefore="{x:Null}" DisplayName="Select Item 'SELECT  personIncurring...'" sap2010:WorkflowViewState.IdRef="SelectItem_11" Item="[Member3Name]">
+                          <ui:SelectItem.Items>
+                            <scg:List x:TypeArguments="x:String" Capacity="4">
+                              <x:String>Duane Robinson 41M</x:String>
+                              <x:String>Steven Upre 12F</x:String>
+                            </scg:List>
+                          </ui:SelectItem.Items>
+                          <ui:SelectItem.Target>
+                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="4d1f5e7a179202621b92dca9cc61e7fa" Selector="&lt;html title='LA IE - Disability - Details' /&gt;&lt;webctrl id='cin' tag='SELECT' /&gt;" WaitForReady="INTERACTIVE" />
+                          </ui:SelectItem.Target>
+                        </ui:SelectItem>
+                      </If.Then>
+                    </If>
+                    <If Condition="[row(&quot;Name&quot;).ToString=&quot;M4&quot;]" sap2010:WorkflowViewState.IdRef="If_6">
+                      <If.Then>
+                        <ui:SelectItem ContinueOnError="{x:Null}" DelayAfter="{x:Null}" DelayBefore="{x:Null}" DisplayName="Select Item 'SELECT  personIncurring...'" sap2010:WorkflowViewState.IdRef="SelectItem_12" Item="[Member4Name]">
+                          <ui:SelectItem.Items>
+                            <scg:List x:TypeArguments="x:String" Capacity="4">
+                              <x:String>Duane Robinson 41M</x:String>
+                              <x:String>Steven Upre 12F</x:String>
+                            </scg:List>
+                          </ui:SelectItem.Items>
+                          <ui:SelectItem.Target>
+                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="4d1f5e7a179202621b92dca9cc61e7fa" Selector="&lt;html title='LA IE - Disability - Details' /&gt;&lt;webctrl id='cin' tag='SELECT' /&gt;" WaitForReady="INTERACTIVE" />
+                          </ui:SelectItem.Target>
+                        </ui:SelectItem>
+                      </If.Then>
+                    </If>
+                    <ui:TypeInto DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="Type Into 'INPUT  montheffectiveBe...'" EmptyField="True" sap2010:WorkflowViewState.IdRef="TypeInto_1" SendWindowMessages="False" SimulateType="False" Text="[CircumstanceStartDateArr(0)]">
+                      <ui:TypeInto.Target>
+                        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="fef1dd38cdaa9a0c844c37f3091c8820" Selector="&lt;html title='LA IE - Disability - Details' /&gt;&lt;webctrl id='montheffectiveBeginDate' tag='INPUT' /&gt;" WaitForReady="INTERACTIVE" />
+                      </ui:TypeInto.Target>
+                    </ui:TypeInto>
+                    <ui:TypeInto DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="Type Into 'INPUT  dateeffectiveBeg...'" EmptyField="True" sap2010:WorkflowViewState.IdRef="TypeInto_2" SendWindowMessages="False" SimulateType="False" Text="[CircumstanceStartDateArr(1)]">
+                      <ui:TypeInto.Target>
+                        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="5b19e767379108fd570ad5473dec3048" Selector="&lt;html title='LA IE - Disability - Details' /&gt;&lt;webctrl id='dateeffectiveBeginDate' tag='INPUT' /&gt;" WaitForReady="INTERACTIVE" />
+                      </ui:TypeInto.Target>
+                    </ui:TypeInto>
+                    <ui:TypeInto DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="Type Into 'INPUT  yeareffectiveBeg...'" EmptyField="True" sap2010:WorkflowViewState.IdRef="TypeInto_3" SendWindowMessages="False" SimulateType="False" Text="[CircumstanceStartDateArr(2)]">
+                      <ui:TypeInto.Target>
+                        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="abfdde3689931e49d7747da31196e587" Selector="&lt;html title='LA IE - Disability - Details' /&gt;&lt;webctrl id='yeareffectiveBeginDate' tag='INPUT' /&gt;" WaitForReady="INTERACTIVE" />
+                      </ui:TypeInto.Target>
+                    </ui:TypeInto>
+                    <ui:SelectItem ContinueOnError="{x:Null}" DelayAfter="{x:Null}" DelayBefore="{x:Null}" DisplayName="Select Item 'SELECT  rtcheck1'" sap2010:WorkflowViewState.IdRef="SelectItem_2" Item="[row(&quot;DisabilityType&quot;).ToString]">
+                      <ui:SelectItem.Items>
+                        <scg:List x:TypeArguments="x:String" Capacity="8">
+                          <x:String>Blind</x:String>
+                          <x:String>Conversion Value</x:String>
+                          <x:String>Hearing Impaired</x:String>
+                          <x:String>Mental</x:String>
+                          <x:String>Physical</x:String>
+                          <x:String>Unknown</x:String>
+                        </scg:List>
+                      </ui:SelectItem.Items>
+                      <ui:SelectItem.Target>
+                        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="ad430b8a432d12962db4ce7b2ceed86f" Selector="&lt;html title='LA IE - Disability - Details' /&gt;&lt;webctrl id='rtcheck1' tag='SELECT' /&gt;" WaitForReady="INTERACTIVE" />
+                      </ui:SelectItem.Target>
+                    </ui:SelectItem>
+                    <ui:Comment Text="//aDDED BY Aniket" sap2010:WorkflowViewState.IdRef="Comment_1" />
+                    <ui:SelectItem ContinueOnError="{x:Null}" DelayAfter="{x:Null}" DelayBefore="{x:Null}" DisplayName="Select Item 'SELECT  permTemp1'" sap2010:WorkflowViewState.IdRef="SelectItem_3" Item="[row(&quot;PermOrTemp&quot;).ToString]">
+                      <ui:SelectItem.Items>
+                        <scg:List x:TypeArguments="x:String" Capacity="4">
+                          <x:String>Permanent</x:String>
+                          <x:String>Temporary</x:String>
+                        </scg:List>
+                      </ui:SelectItem.Items>
+                      <ui:SelectItem.Target>
+                        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="e2294601d3e4faa285425edf582a3c43" Selector="&lt;html title='LA IE - Disability - Details' /&gt;&lt;webctrl id='permTemp1' tag='SELECT' /&gt;" WaitForReady="INTERACTIVE" />
+                      </ui:SelectItem.Target>
+                    </ui:SelectItem>
+                    <ui:SelectItem ContinueOnError="{x:Null}" DelayAfter="{x:Null}" DelayBefore="{x:Null}" DisplayName="Select Item 'SELECT  disabilityCrite...'" sap2010:WorkflowViewState.IdRef="SelectItem_4" Item="[row(&quot;CriteriaApplytoDisability&quot;).ToString]">
+                      <ui:SelectItem.Items>
+                        <scg:List x:TypeArguments="x:String" Capacity="16">
+                          <x:String>Is a surviving child of a veteran and considered by VA to permanently incapable of self-support.</x:String>
+                          <x:String>Is a veteran or surviving spouse determined by VA to be housebound or in need of aid and attendance.</x:String>
+                          <x:String>Is a veteran receiving non-service connected disability benefits rated at 100.</x:String>
+                          <x:String>Is a veteran receiving service-connected disability benefits rated at 100.</x:String>
+                          <x:String>Is a veteran's survivor (widow or child) receiving veteran's benefits and having a disability considered permanent by the Social Security office.</x:String>
+                          <x:String>No federal disability payment received</x:String>
+                          <x:String>Receives SSI Presumptive eligibility payments.</x:String>
+                          <x:String>Receives State-financed SSI payments but not the basic Federal SSI benefit. These payments are generally referred to as "state supplement".</x:String>
+                          <x:String>Receives a Federal, State, or local public disability retirement pension and is considered permanently disabled by the Social Security office.</x:String>
+                          <x:String>Receives disability-related medical benefits under Title XIX (Medicaid), e.g.; receives Medicaid due to MEDS (Medicaid Eligibility A statement from a physician or a licensed or certified psychologist or psychiatrist).</x:String>
+                          <x:String>Receives or has been approved to receive SSI benefits.</x:String>
+                          <x:String>Receives or has been approved to receive Social Security Disability or Blindness benefits.</x:String>
+                          <x:String>Receives railroad retirement disability annuities and meets the Social Security disability criteria.</x:String>
+                        </scg:List>
+                      </ui:SelectItem.Items>
+                      <ui:SelectItem.Target>
+                        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="ca35d46738b85f350564dfc498f4ad58" Selector="&lt;html title='LA IE - Disability - Details' /&gt;&lt;webctrl id='disabilityCriteria' tag='SELECT' /&gt;" WaitForReady="INTERACTIVE" />
+                      </ui:SelectItem.Target>
+                    </ui:SelectItem>
+                    <ui:SelectItem ContinueOnError="{x:Null}" DelayAfter="{x:Null}" DelayBefore="{x:Null}" DisplayName="Select Item 'SELECT  incapacityDesc'" sap2010:WorkflowViewState.IdRef="SelectItem_5" Item="[row(&quot;IncapacityDecision&quot;).ToString]">
+                      <ui:SelectItem.Items>
+                        <scg:List x:TypeArguments="x:String" Capacity="4">
+                          <x:String>Consultant Decision</x:String>
+                          <x:String>Continuous Hospitalization</x:String>
+                          <x:String>Permanent or Temporary</x:String>
+                        </scg:List>
+                      </ui:SelectItem.Items>
+                      <ui:SelectItem.Target>
+                        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="4a7f891fc072065536844e17955243cb" Selector="&lt;html title='LA IE - Disability - Details' /&gt;&lt;webctrl id='incapacityDesc' tag='SELECT' /&gt;" WaitForReady="INTERACTIVE" />
+                      </ui:SelectItem.Target>
+                    </ui:SelectItem>
+                    <If Condition="[row(&quot;AddAnother&quot;).ToString=&quot;Yes&quot;]" sap2010:WorkflowViewState.IdRef="If_7">
+                      <If.Then>
+                        <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'push button'" sap2010:WorkflowViewState.IdRef="Click_3" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+                          <ui:Click.CursorPosition>
+                            <ui:CursorPosition Position="Center">
+                              <ui:CursorPosition.OffsetX>
+                                <InArgument x:TypeArguments="x:Int32" />
+                              </ui:CursorPosition.OffsetX>
+                              <ui:CursorPosition.OffsetY>
+                                <InArgument x:TypeArguments="x:Int32" />
+                              </ui:CursorPosition.OffsetY>
+                            </ui:CursorPosition>
+                          </ui:Click.CursorPosition>
+                          <ui:Click.Target>
+                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="8d6001a6104c190d8dea26ad24d36c5f" Selector="&lt;html title='LA IE - Disability - Details' /&gt;&lt;ctrl automationid='actionButtonAddWithArrow' /&gt;" WaitForReady="INTERACTIVE" />
+                          </ui:Click.Target>
+                        </ui:Click>
+                      </If.Then>
+                      <If.Else>
+                        <Sequence sap2010:WorkflowViewState.IdRef="Sequence_8">
+                          <ui:SendHotkey DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="Send Hotkey" EmptyField="False" sap2010:WorkflowViewState.IdRef="SendHotkey_2" Key="pgdn" KeyModifiers="None" SendWindowMessages="False" SpecialKey="True">
+                            <ui:SendHotkey.Target>
+                              <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" Selector="&lt;html title='LA IE - Disability - Details' /&gt;&#xA;&lt;ctrl automationid='actionButtonNext' /&gt;" WaitForReady="INTERACTIVE" />
+                            </ui:SendHotkey.Target>
+                          </ui:SendHotkey>
+                          <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'push button  Next'" sap2010:WorkflowViewState.IdRef="Click_4" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+                            <ui:Click.CursorPosition>
+                              <ui:CursorPosition Position="Center">
+                                <ui:CursorPosition.OffsetX>
+                                  <InArgument x:TypeArguments="x:Int32" />
+                                </ui:CursorPosition.OffsetX>
+                                <ui:CursorPosition.OffsetY>
+                                  <InArgument x:TypeArguments="x:Int32" />
+                                </ui:CursorPosition.OffsetY>
+                              </ui:CursorPosition>
+                            </ui:Click.CursorPosition>
+                            <ui:Click.Target>
+                              <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="2a60a51bd5be9fb6b78db2db238c1e4c" Selector="&lt;html title='LA IE - Disability - Details' /&gt;&lt;ctrl automationid='actionButtonNext' /&gt;" WaitForReady="INTERACTIVE" />
+                            </ui:Click.Target>
+                          </ui:Click>
+                        </Sequence>
+                      </If.Else>
+                    </If>
+                    <Assign sap2010:WorkflowViewState.IdRef="Assign_21">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="ui:GenericValue">[MemberCounter]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="ui:GenericValue">[MemberCounter + 1]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                  </Sequence>
+                </While>
+              </Sequence>
+            </ActivityAction>
+          </ui:ForEachRow.Body>
+        </ui:ForEachRow>
+        <Assign sap2010:WorkflowViewState.IdRef="Assign_22">
+          <Assign.To>
+            <OutArgument x:TypeArguments="ui:GenericValue">[IndexCount]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="ui:GenericValue">[IndexCount+1]</InArgument>
+          </Assign.Value>
+        </Assign>
+      </Sequence>
+    </While>
+    <sads:DebugSymbol.Symbol>d4cBQzpcVXNlcnNcYXNoZXJrYXJcRGVza3RvcFxMQUlFRnJhbWVXb3JrTGF0ZXN0XFdQX0F1dG9tYXRpb24gTWFpbiBMYXRlc3RcV1BfQXV0b21hdGlvbiBNYWluXFdQX0F1dG9tYXRpb24gTWFpblxXUF9EaXNhYmlsaXR5RGV0YWlscy54YW1siwFRA+EDDgIBAWQFdSADAa8BdgXBARACAX/CAQXfAw0CAQJkoAFksgEDAbYBagtyFgMBsAF3B34QAwGqAX8Hf5oBAwGnAYABB4ABkwEDAaUBgQEHiAEQAwGgAYkBB5ABEAMBmwGRAQeYARADAZYBmQEHoAEQAwGSAaEBB6gBEAMBjQGpAQewARADAYkBsQEHuAEQAwGEAbkBB8ABEAMBgAHDAQfeAxICAQTCAUDCAWUCAQNrDXEhAwGxAXw5fD4DAa0BeTp5SgMBqwF/Xn+XAQMBqAGAAV6AAZABAwGmAYYBOYYBTwMBowGDATqDAUwDAaEBjgE2jgFoAwGeAYsBN4sBSwMBnAGWATaWAWkDAZkBkwE3kwFMAwGXAZ4BPJ4BnwEDAZUBmwE9mwFKAwGTAaYBOaYBTAMBkAGjATqjAUwDAY4BrgE8rgGhAQMBjAGrAT2rAUsDAYoBtgE5tgFNAwGHAbMBOrMBTQMBhQG+ATm+ATwDAYMBuwE6uwFGAwGBAcQBCcsBEgIBecwBCdMBEgIBddQBCdsBEgIBcdwBCfYBHgIBZ/cBCdUDGQIBCtYDCd0DEgIBBWs8a0sDAbQBbhNuQgMBswFrogFrsQEDAbIByQE7yQFaAgF8xgE8xgFNAgF60QE70QE+AgF4zgE8zgFLAgF22QE72QE+AgF01gE81gFJAgFy6QE66QFGAgFw7AFB7AFRAgFu4QE64QFHAgFt5AE65AFZAgFs3AGxAdwBwgECAWrcASfcATYCAWj3ATr3AUsCAWX9AQ/SAxoCAQvbAzvbA0kCAQjYAzzYA0gCAQb+ARGMAhYCAVuNAhHRAxkCAQz+AR/+AVwCAVyAAhWKAiACAV2OAhPQAx4CAQ6NAkyNAm4CAQ2BAheIAiACAWCJAheJAp8BAgFejwIVkwIlAgFVlAIVlALdAQIBT5UCFaMCGgIBSaQCFbICGgIBQ7MCFcECGgIBPcICFdACGgIBN9ECFdUCIwIBM9YCFdoCIwIBL9sCFd8CIwIBK+ACFe4CJQIBKO8CFe8CaAIBJ/ACFfoCJQIBJPsCFZADJQIBIZEDFZwDJQIBHp0DFccDGgIBFMgDFc8DHgIBD4YCSYYCWAIBY4MCSoMCVwIBYYkCbokCnAECAV+RAkGRAlgCAVmPAr4BjwLFAQIBV48CWI8CbwIBVpQCdZQCjgECAVOUApYBlAKyAQIBUZQCvQGUAsABAgFQlQIjlQJUAgFKlwIZoQIpAgFLpAIjpAJUAgFEpgIZsAIpAgFFswIjswJUAgE+tQIZvwIpAgE/wgIjwgJUAgE4xAIZzgIpAgE50wKoAdMClwICATbRArsC0QLaAgIBNNgCqAHYApYCAgEy1gK7AtYC2gICATDdAqgB3QKWAgIBLtsCuwLbAtoCAgEs4ALNAeAC+QECASnsAqgB7AKJAgIBKvACzgHwAvYBAgEl+AKoAfgCigICASb7AtcB+wKOAgIBIo4DqAGOA5MCAgEjkQPTAZEDgwICAR+aA6gBmgOPAgIBIJ0DI50DWwIBFZ8DGa0DJAIBHLADGcUDJAIBFs0DR80DWgIBEsoDSMoDVwIBEJcC2wGXAuoBAgFMnwKsAZ8CiAICAU6mAtwBpgLrAQIBRq4CrAGuAogCAgFItQLcAbUC6wECAUC9AqwBvQKIAgIBQsQC3AHEAusBAgE6zAKsAcwCiAICATyrA6wBqwOXAgIBHbEDG7UDKwIBGbYDG8QDJgIBF7MDdbMD3QECARuxA/oBsQOAAgIBGsIDrgHCA5ECAgEY</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="ExcelReadRange_1" sap:VirtualizedContainerService.HintSize="314,58.6666666666667" />
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="336,182.666666666667">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ExcelApplicationScope_1" sap:VirtualizedContainerService.HintSize="826,291.333333333333" />
+      <sap2010:ViewStateData Id="Assign_8" sap:VirtualizedContainerService.HintSize="242,61.3333333333333" />
+      <sap2010:ViewStateData Id="WriteLine_1" sap:VirtualizedContainerService.HintSize="242,62" />
+      <sap2010:ViewStateData Id="WriteLine_2" sap:VirtualizedContainerService.HintSize="242,62" />
+      <sap2010:ViewStateData Id="Assign_9" sap:VirtualizedContainerService.HintSize="242,61.3333333333333" />
+      <sap2010:ViewStateData Id="Assign_10" sap:VirtualizedContainerService.HintSize="242,61.3333333333333" />
+      <sap2010:ViewStateData Id="Assign_11" sap:VirtualizedContainerService.HintSize="242,61.3333333333333" />
+      <sap2010:ViewStateData Id="Assign_12" sap:VirtualizedContainerService.HintSize="242,61.3333333333333" />
+      <sap2010:ViewStateData Id="Assign_13" sap:VirtualizedContainerService.HintSize="242,61.3333333333333" />
+      <sap2010:ViewStateData Id="Assign_14" sap:VirtualizedContainerService.HintSize="242,61.3333333333333" />
+      <sap2010:ViewStateData Id="Assign_15" sap:VirtualizedContainerService.HintSize="242,61.3333333333333" />
+      <sap2010:ViewStateData Id="Assign_16" sap:VirtualizedContainerService.HintSize="242,61.3333333333333" />
+      <sap2010:ViewStateData Id="Sequence_4" sap:VirtualizedContainerService.HintSize="826,1200">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Assign_17" sap:VirtualizedContainerService.HintSize="777.333333333333,61.3333333333333" />
+      <sap2010:ViewStateData Id="Assign_18" sap:VirtualizedContainerService.HintSize="777.333333333333,61.3333333333333" />
+      <sap2010:ViewStateData Id="Assign_19" sap:VirtualizedContainerService.HintSize="777.333333333333,61.3333333333333" />
+      <sap2010:ViewStateData Id="FilterDataTable_2" sap:VirtualizedContainerService.HintSize="777.333333333333,58.6666666666667" />
+      <sap2010:ViewStateData Id="Assign_20" sap:VirtualizedContainerService.HintSize="242,61.3333333333333" />
+      <sap2010:ViewStateData Id="WriteLine_3" sap:VirtualizedContainerService.HintSize="242,62" />
+      <sap2010:ViewStateData Id="Sequence_6" sap:VirtualizedContainerService.HintSize="264,287.333333333333">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_2" sap:VirtualizedContainerService.HintSize="724.666666666667,439.333333333333" />
+      <sap2010:ViewStateData Id="GetRowItem_1" sap:VirtualizedContainerService.HintSize="676,64" />
+      <sap2010:ViewStateData Id="SplitString_1" sap:VirtualizedContainerService.HintSize="676,22" />
+      <sap2010:ViewStateData Id="SelectItem_6" sap:VirtualizedContainerService.HintSize="314,134" />
+      <sap2010:ViewStateData Id="If_3" sap:VirtualizedContainerService.HintSize="676,286" />
+      <sap2010:ViewStateData Id="SelectItem_10" sap:VirtualizedContainerService.HintSize="314,134" />
+      <sap2010:ViewStateData Id="If_4" sap:VirtualizedContainerService.HintSize="676,288" />
+      <sap2010:ViewStateData Id="SelectItem_11" sap:VirtualizedContainerService.HintSize="314,134" />
+      <sap2010:ViewStateData Id="If_5" sap:VirtualizedContainerService.HintSize="676,288" />
+      <sap2010:ViewStateData Id="SelectItem_12" sap:VirtualizedContainerService.HintSize="314,134" />
+      <sap2010:ViewStateData Id="If_6" sap:VirtualizedContainerService.HintSize="676,286" />
+      <sap2010:ViewStateData Id="TypeInto_1" sap:VirtualizedContainerService.HintSize="676,134" />
+      <sap2010:ViewStateData Id="TypeInto_2" sap:VirtualizedContainerService.HintSize="676,134" />
+      <sap2010:ViewStateData Id="TypeInto_3" sap:VirtualizedContainerService.HintSize="676,134" />
+      <sap2010:ViewStateData Id="SelectItem_2" sap:VirtualizedContainerService.HintSize="676,134" />
+      <sap2010:ViewStateData Id="Comment_1" sap:VirtualizedContainerService.HintSize="676,55.3333333333333" />
+      <sap2010:ViewStateData Id="SelectItem_3" sap:VirtualizedContainerService.HintSize="676,134" />
+      <sap2010:ViewStateData Id="SelectItem_4" sap:VirtualizedContainerService.HintSize="676,134" />
+      <sap2010:ViewStateData Id="SelectItem_5" sap:VirtualizedContainerService.HintSize="676,134" />
+      <sap2010:ViewStateData Id="Click_3" sap:VirtualizedContainerService.HintSize="314,106" />
+      <sap2010:ViewStateData Id="SendHotkey_2" sap:VirtualizedContainerService.HintSize="314,116.666666666667" />
+      <sap2010:ViewStateData Id="Click_4" sap:VirtualizedContainerService.HintSize="314,106" />
+      <sap2010:ViewStateData Id="Sequence_8" sap:VirtualizedContainerService.HintSize="336,386.666666666667">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_7" sap:VirtualizedContainerService.HintSize="676,538.666666666667" />
+      <sap2010:ViewStateData Id="Assign_21" sap:VirtualizedContainerService.HintSize="676,61.3333333333333" />
+      <sap2010:ViewStateData Id="Sequence_7" sap:VirtualizedContainerService.HintSize="698,3551.33333333333">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="While_2" sap:VirtualizedContainerService.HintSize="724.666666666667,3713.33333333333" />
+      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="746.666666666667,4316.66666666667">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ForEachRow_1" sap:VirtualizedContainerService.HintSize="777.333333333333,4468" />
+      <sap2010:ViewStateData Id="Assign_22" sap:VirtualizedContainerService.HintSize="777.333333333333,62" />
+      <sap2010:ViewStateData Id="Sequence_5" sap:VirtualizedContainerService.HintSize="799.333333333333,5096.66666666667">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="While_1" sap:VirtualizedContainerService.HintSize="826,5258.66666666667" />
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="848,6954">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="WP_DisabilityDetails_1" sap:VirtualizedContainerService.HintSize="888,7034" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>
